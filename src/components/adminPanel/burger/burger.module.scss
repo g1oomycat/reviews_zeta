@@ -1,0 +1,106 @@
+@import "../../../styles/scss/break_point.scss";
+
+.burger {
+  position: fixed;
+  height: 100%;
+  transition: width 0.4s ease-in-out;
+  width: var(--burger-with);
+  border-right: 1px solid $adm-border;
+  font-size: $admin-l;
+  font-weight: 500;
+  z-index: 9999;
+  background-color: $adm-background-burger;
+  color: $adm-white;
+  overflow: hidden;
+  &:hover {
+    width: 25rem;
+    .conteiner .item .title_item p {
+      opacity: 1;
+      margin-left: 0;
+    }
+    .conteiner .item .arrow {
+      opacity: 1;
+    }
+    .logo {
+      opacity: 1;
+    }
+  }
+  .logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $height-header;
+    color: $red;
+    transition: all 0.3s ease-in-out;
+    opacity: var(--p-opacity);
+    cursor: pointer;
+    font-family: "AdihausDIN-SemiBold", sans-serif;
+    letter-spacing: 0.03em;
+    font-size: $admin-xxl;
+    border-bottom: 1px solid #797878;
+    line-height: 1;
+  }
+  .conteiner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.8rem;
+    .item {
+      color: inherit;
+      font-size: inherit;
+      background-color: inherit;
+      font-weight: inherit;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 1.5rem 0.7rem;
+      margin-top: 0.3rem;
+      border-radius: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      justify-content: space-between;
+      cursor: pointer;
+      &.active_link {
+        // background-color: rgb(161, 22, 53);
+        background-color: $red;
+        // color: $adm-black;
+      }
+      &:hover,
+      &.active {
+        background-color: $adm-background;
+        color: $adm-black;
+      }
+      .arrow {
+        font-size: $admin-xl;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease, opacity 0.2s ease-in-out;
+
+        opacity: var(--p-opacity);
+      }
+      .title_item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        svg {
+          font-size: $admin-xl;
+        }
+        p {
+          transition: opacity 0.2s ease-in-out, margin-left 0.2s ease-in-out;
+          opacity: var(--p-opacity);
+          margin-left: var(--p-margin);
+          line-height: 0;
+        }
+      }
+    }
+
+    .wrapper_sublist {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
+    }
+  }
+}

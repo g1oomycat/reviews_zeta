@@ -1,0 +1,98 @@
+//fonts
+@font-face {
+  font-family: "AdihausDIN-Extrabold";
+
+  /* Extrabold font */
+  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff2")
+      format("woff2"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff")
+      format("woff"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.otf")
+      format("otf");
+  font-weight: 800;
+  font-style: normal;
+
+  /* Bold font */
+  font-family: "AdihausDIN-Bold";
+  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff2")
+      format("woff2"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff")
+      format("woff"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.otf")
+      format("otf");
+  font-weight: 700;
+  font-style: normal;
+
+  /* Semibold font */
+  font-family: "AdihausDIN-SemiBold";
+  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff2")
+      format("woff2"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff")
+      format("woff"),
+    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.otf")
+      format("otf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+// Breakpoints
+$layout-breakpoint-SCREEN_SSSM: 300px;
+$layout-breakpoint-SCREEN_SSM: 400px;
+$layout-breakpoint-SCREEN_SM: 576px;
+$layout-breakpoint-SCREEN_MD: 768px;
+$layout-breakpoint-SCREEN_LG: 992px;
+$layout-breakpoint-SCREEN_XL: 1200px;
+$layout-breakpoint-SCREEN_XXL: 1500px;
+
+// Colors client
+$background: #d9d9d9;
+$white: #fff;
+$black: #24242a;
+$red: #c21f39;
+$bg-color: rgb(90, 20, 20);
+$border-color: rgb(104, 30, 30);
+
+// Colors admin
+$adm-black: #24242a;
+$adm-white: #fff;
+$adm-background: #f0f0f0;
+$adm-background-burger: #3d3a3a;
+$adm-border: rgba(#24242a, 0.3);
+
+//font-size client
+$xxs: clamp(0.8rem, calc(0.427rem + 1.333vw), 1rem);
+$xs: clamp(1rem, calc(0.627rem + 1.333vw), 1.2rem);
+$s: clamp(1.2rem, calc(0.827rem + 1.333vw), 1.4rem);
+$m: clamp(1.4rem, calc(1.027rem + 1.333vw), 1.6rem);
+$l: clamp(1.6rem, calc(1.227rem + 1.333vw), 1.8rem);
+$xl: clamp(1.8rem, calc(1.427rem + 1.333vw), 2rem);
+$xxl: clamp(2rem, calc(1.627rem + 1.333vw), 2.2rem);
+
+//font-size admin
+$admin-xxs: 1.2rem;
+$admin-xs: 1.4rem;
+$admin-s: 1.6rem;
+$admin-m: 1.8rem;
+$admin-l: 2rem;
+$admin-xl: 2.4rem;
+$admin-xxl: 2.8rem;
+$admin-xxxl: 3.2rem;
+
+// defaults atribute admin panel
+$height-header: 5rem;
+$width-burger: 35rem;
+
+// other
+$shadow-midle: 0 4px 8px rgba(0, 0, 0, 0.1), 0 16px 32px rgba(0, 0, 0, 0.1);
+$shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+//mixin
+
+@mixin style-conteiner {
+  border: 1px solid $adm-border;
+  background-color: $adm-white;
+  border-radius: 1rem;
+  transition: box-shadow 0.3s ease;
+  &:hover {
+    box-shadow: $shadow-midle;
+  }
+}

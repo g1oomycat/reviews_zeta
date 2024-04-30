@@ -1,0 +1,9 @@
+@import "../../../styles/scss/break_point.scss";
+.title_block {
+  font-size: $admin-xxl;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3em 0;
+  border-bottom: 1px solid $adm-border;
+}

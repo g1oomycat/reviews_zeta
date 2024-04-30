@@ -1,0 +1,9 @@
+:root {
+  --burger-with: 25rem;
+  --body-color: white;
+  --p-opacity: 1;
+  --p-margin: 0;
+}
+@import "./scss/break_point.scss";
+@import "./scss/common.scss";
+@import "./scss/reset.scss";

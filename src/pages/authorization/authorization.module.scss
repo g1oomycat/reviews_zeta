@@ -1,0 +1,31 @@
+@import "../../styles/scss/break_point.scss";
+
+.auth {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper {
+    width: 50rem;
+    .column_form {
+      position: relative;
+      padding: 3rem 2rem;
+      border: 1px solid $black;
+      background-color: $white;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      box-shadow: $shadow-midle;
+      .enter_title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

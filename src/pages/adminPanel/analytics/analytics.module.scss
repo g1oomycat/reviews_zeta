@@ -1,0 +1,113 @@
+@import "../../../styles/scss/break_point.scss";
+
+.title_block {
+  font-size: $admin-xxl;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3em 0em 0.7em 0em;
+  border-bottom: 1px solid $adm-border;
+}
+.info_conteiner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 2rem;
+  align-items: center;
+  margin: 2rem 0 3rem 0;
+  .item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background-color: $adm-white;
+    border: 1px solid $adm-border;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    &:hover {
+      box-shadow: $shadow-small;
+      .icon_item {
+        opacity: 0.9;
+        scale: 1.1;
+      }
+    }
+    .item_wrap {
+      display: flex;
+      flex-direction: column;
+
+      .num {
+        font-size: $admin-l;
+        font-weight: 600;
+        margin-left: 0.4em;
+      }
+    }
+    .icon_item {
+      opacity: 0.6;
+      transition: inherit;
+      svg {
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
+  .item_title {
+    font-size: $admin-xs;
+    font-weight: 400;
+    margin-bottom: 0.4em;
+  }
+}
+.bar {
+  width: inherit;
+  position: relative;
+  display: flex;
+  .item_bar {
+    position: relative;
+    padding: 2rem 1rem;
+    border: 1px solid $adm-border;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: $adm-white;
+    transition: box-shadow 0.3s ease;
+    &:hover {
+      box-shadow: $shadow-midle;
+    }
+    &:first-child {
+      width: 74%;
+      margin-right: 1%;
+    }
+    &:last-child {
+      width: 25%;
+    }
+    .title_bar {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.6em;
+    }
+    .legend_wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .barChart {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.legend_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  font-size: $admin-xxs;
+  font-weight: 500;
+  div {
+    border-width: 1px;
+    border-style: solid;
+  }
+}

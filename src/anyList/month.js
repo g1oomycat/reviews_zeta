@@ -1,0 +1,28 @@
+export const month = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+export const selectMonth = [
+  { value: { month: 0 }, label: "Январь" },
+  { value: { month: 1 }, label: "Февраль" },
+  { value: { month: 2 }, label: "Март" },
+  { value: { month: 3 }, label: "Апрель" },
+  { value: { month: 4 }, label: "Май" },
+  { value: { month: 5 }, label: "Июнь" },
+  { value: { month: 6 }, label: "Июль" },
+  { value: { month: 7 }, label: "Август" },
+  { value: { month: 8 }, label: "Сентябрь" },
+  { value: { month: 9 }, label: "Октябрь" },
+  { value: { month: 10 }, label: "Ноябрь" },
+  { value: { month: 11 }, label: "Декабрь" },
+];
