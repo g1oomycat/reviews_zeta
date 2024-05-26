@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./reviws.module.scss";
 import Title from "../../../components/adminPanel/title/Title";
-import { getReviwsPlace } from "../../../api/FBreviws";
-import { getPlaceList } from "../../../api/Place";
-import Table from "../../../components/adminPanel/table/Table";
+import { getReviwsByAtribute, getReviwsList } from "../../../api/Reviws";
+import TableForReviws from "../../../components/adminPanel/tables/TableForReviws";
+import { Context } from "../../..";
+import { observer } from "mobx-react-lite";
 
-const Reviws = () => {
+const Reviws = observer(() => {
+  const { directorData, placeList } = useContext(Context);
+
   const [listReviws, setListReviws] = useState([]);
 
-  const request = async (place) => {
-    try {
-      const reviewsList = await getReviwsPlace(place);
-      setListReviws(reviewsList);
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
+  const request = async () => {
+    let responce;
+    if (directorData.director.role === "admin") {
+      responce = await getReviwsList();
+    } else {
+      responce = await getReviwsByAtribute(
+        "place",
+        directorData.director.place
+      );
     }
+    setListReviws(responce);
   };
   useEffect(() => {
-    request("rayymbek");
-  }, []);
+    if (Object.keys(directorData.director).length) {
+      request();
+    }
+  }, [directorData.director]);
   return (
-    <div className="wrapper_main">
-      <div className="conteiner-admin">
-        <div className="body-admin">
-          <Title text={"Отзывы"} />
-          <Table listReviws={listReviws} nameTitle={"отзывов"} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Title text={"Отзывы"} />
+      <TableForReviws dataList={listReviws} />
+    </>
   );
-};
+});
 
 export default Reviws;

@@ -7,14 +7,15 @@ import {
   ButtonSubmit,
   ButtonSubmitText,
 } from "../../../animationsFramerMotion/UserInfo";
-import { AddReviwsList } from "../../../api/FBreviws";
-import { setGradeAndReviewsUser } from "../../../api/FBUsers";
+import { AddReviwsList } from "../../../api/Reviws";
+import { setGradeAndReviewsUser } from "../../../api/Users";
 import Fingerprint2 from "fingerprintjs2";
 import { useNavigate } from "react-router-dom";
 import { listGrades } from "../../../anyList/ListGradeANDURL";
 import InputMask from "react-input-mask";
 import { Timestamp } from "firebase/firestore";
 import { GradeList } from "../../../anyList/gradeList";
+import { getCorrectPlace } from "../../../api/Place";
 
 const Form = ({ userData }) => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Form = ({ userData }) => {
   const [isReviw, setIsReviw] = useState(false);
   const [fingerPrintState, setFingerPrintState] = useState("");
   const [ipUser, setIpUser] = useState("");
+  const [isSend, setIsSend] = useState(false);
 
   // инициализация и настройка react-hook-form
   const {
@@ -66,12 +68,15 @@ const Form = ({ userData }) => {
         console.error("Error getting fingerprint:", error);
       }
     };
+
     getFingerprintAndIp();
   }, []);
 
   //отправка отзыва в БД
 
   const onSubmit = async (data) => {
+    setIsSend(true);
+    const res = await getCorrectPlace("name", userData.place);
     let newReviw = {
       user_ID: userData.id,
       user_Fio: `${userData.lastName} ${userData.firstName}`,
@@ -84,15 +89,14 @@ const Form = ({ userData }) => {
       ip: ipUser,
       date: Timestamp.now(),
     };
-    navigate(
-      `/reviw/gratitude/${listGrades[indexGrade - 1]}/${userData.place}`
-    );
+    navigate(`/reviw/gratitude/${listGrades[indexGrade - 1]}/${res[0].id}`);
     try {
       await AddReviwsList(newReviw);
       await setGradeAndReviewsUser(userData.id);
     } catch (error) {
       console.error(error);
     }
+    setIsSend(false);
   };
 
   return (
@@ -111,11 +115,14 @@ const Form = ({ userData }) => {
               {...register("reviw", {
                 required: "Обязательное поле",
                 maxLength: {
-                  value: 500,
-                  message: "Максимум 500 символов",
+                  value: 1000,
+                  message: "Максимум 1000 символов",
                 },
               })}
             ></textarea>
+            {errors.reviw && (
+              <div className={classes.input_error}>{errors.reviw?.message}</div>
+            )}
           </div>
           <div className={classes.input_text}>
             <InputMask
@@ -140,8 +147,8 @@ const Form = ({ userData }) => {
               {...register("name", {
                 required: "Обязательное поле",
                 pattern: {
-                  value: /^[^-0-9\s]*$/,
-                  message: "Только буквы, тире и пробел",
+                  value: /^[А-Яа-яҢңҒғӨөҮүІіЁёҰұ\s\-]+$/,
+                  message: "Только кириллица, тире и пробел",
                 },
                 maxLength: {
                   value: 30,
@@ -166,6 +173,7 @@ const Form = ({ userData }) => {
               variants={ButtonSubmit}
               type="submit"
               className={`${classes.submit} border_and_bg`}
+              disabled={isSend}
             >
               <motion.span
                 initial="initial"
@@ -173,7 +181,7 @@ const Form = ({ userData }) => {
                 exit="exit"
                 variants={ButtonSubmitText}
               >
-                Отправить отзыв
+                {isSend ? "Отправка..." : "Отправить отзыв"}
               </motion.span>
             </motion.button>
           )}

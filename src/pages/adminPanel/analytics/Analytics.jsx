@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./analytics.module.scss";
-import { getReviwsPlace } from "../../../api/FBreviws";
+import { getReviwsByAtribute, getReviwsList } from "../../../api/Reviws";
 import { VerticalBarChart } from "../../../components/adminPanel/BarChart/VerticalBarChart";
 import PieBarChart from "../../../components/adminPanel/BarChart/PieBarChart";
 import SelectPlace from "../../../components/adminPanel/selectPlace/SelectPlace";
@@ -13,10 +13,13 @@ import { BgColor, BorderColor } from "../../../anyList/colorToPie";
 import Title from "../../../components/adminPanel/title/Title";
 import { GradeList } from "../../../anyList/gradeList";
 import { MdOutlineMessage } from "react-icons/md";
+import { observer } from "mobx-react-lite";
+import { Context } from "../../..";
 
-const Analytics = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Analytics = observer(() => {
+  const { directorData, placeList } = useContext(Context);
   const [listReviws, setListReviws] = useState([]);
+  const [filteredListReviws, setFilteredListReviws] = useState([]);
   const [objVerticalBar, setObjVerticalBar] = useState([]);
   const [objPieBar, setPieBar] = useState([]);
   const [absGrade, setAbsGrade] = useState(0);
@@ -29,65 +32,81 @@ const Analytics = () => {
   });
 
   //select Place
-  const [selectedPlace, setSelectedPlace] = useState({
-    value: "all",
-    label: "Все",
-  });
+  const [selectedPlace, setSelectedPlace] = useState({});
 
-  const request = async (place) => {
-    try {
-      const reviews = await getReviwsPlace(place);
-      setListReviws(reviews);
-      setAbsGrade(
-        (
-          reviews.reduce((sum, item) => sum + item.grade, 0) / reviews.length
-        ).toFixed(1)
+  const request = async () => {
+    let responce;
+    if (directorData.director.role === "admin") {
+      setSelectedPlace({
+        value: "all",
+        label: "Все",
+      });
+      responce = await getReviwsList();
+    } else {
+      responce = await getReviwsByAtribute(
+        "place",
+        directorData.director.place
       );
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
+
+      setSelectedPlace({
+        value: placeList.placesData[0].name,
+        label: placeList.placesData[0].name,
+      });
     }
+    setListReviws(responce);
   };
   useEffect(() => {
-    request("rayymbek");
-    setIsOpen(true);
-  }, []);
+    if (Object.keys(directorData.director).length) {
+      request();
+    }
+  }, [directorData.director]);
 
   //данные для графиков и средниее данные
   useEffect(() => {
     if (listReviws.length === 0) return;
-
+    if (!filteredListReviws.length) {
+      return alert("недостаточно данных");
+    }
     const [dataToPie, grade] = dataToPieBarChar(
-      listReviws,
+      filteredListReviws,
       selectedPeriod.value
     );
     setPieBar(dataToPie);
     setAbsGrade(grade);
     const [dataToVertical, reviwsLength] = dataToVerticalBarChar(
-      listReviws,
+      filteredListReviws,
       selectedPeriod.value
     );
     setObjVerticalBar(dataToVertical);
     setAbsReviws(reviwsLength);
-  }, [listReviws, selectedPeriod]);
+  }, [filteredListReviws, selectedPeriod]);
+
+  //фильтрация данных по месту
+  useEffect(() => {
+    if (listReviws.length === 0 || !Object.keys(selectedPlace).length) return;
+    if (selectedPlace.value === "all") {
+      setFilteredListReviws(listReviws);
+    } else {
+      setFilteredListReviws(
+        listReviws.filter((el) => el.place === selectedPlace.value)
+      );
+    }
+  }, [listReviws, selectedPlace]);
   return (
-    <div className="wrapper_main">
-      <div className="conteiner-admin">
-        <div className="body-admin">
-          <Title text={"Статистика магазина"} />
-          <BarInfo
-            selectedPlace={selectedPlace}
-            setSelectedPlace={setSelectedPlace}
-            selectedPeriod={selectedPeriod}
-            setSelectedPeriod={setSelectedPeriod}
-            absGrade={absGrade}
-            absReviws={absReviws}
-          />
-          <BarChart objVerticalBar={objVerticalBar} objPieBar={objPieBar} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Title text={"Статистика магазина"} />
+      <BarInfo
+        selectedPlace={selectedPlace}
+        setSelectedPlace={setSelectedPlace}
+        selectedPeriod={selectedPeriod}
+        setSelectedPeriod={setSelectedPeriod}
+        absGrade={absGrade}
+        absReviws={absReviws}
+      />
+      <BarChart objVerticalBar={objVerticalBar} objPieBar={objPieBar} />
+    </>
   );
-};
+});
 
 const Legend = ({ el, index }) => (
   <div className={classes.legend_item}>

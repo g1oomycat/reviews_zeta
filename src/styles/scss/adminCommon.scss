@@ -1,0 +1,118 @@
+@import './break_point.scss';
+
+//admin panel
+.conteiner-admin {
+	position: relative;
+	width: 100%;
+	min-height: 100dvh;
+	transition: padding 0.4s ease-in-out;
+	padding: $height-header 0rem 0rem var(--burger-with);
+	background-color: $adm-background;
+}
+.body-admin {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 1.5rem;
+}
+
+.count_title {
+	margin-top: 1em;
+	font-size: $admin-m;
+	padding-left: 0.2rem;
+}
+
+.table_admin {
+	margin-top: 1rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	@include style-conteiner;
+	overflow: hidden;
+	.row {
+		display: grid;
+		column-gap: 0.5rem;
+		width: 100%;
+		min-height: 5rem;
+		align-items: center;
+		font-size: $admin-s;
+		padding: 1rem 1rem;
+		transition: background-color 0.3s ease;
+		&:not(:last-child) {
+			border-bottom: 1px solid $adm-border;
+		}
+		&:hover {
+			background-color: rgb(236, 236, 236);
+		}
+		&.header {
+			background-color: $adm-background-burger;
+			color: $adm-white;
+			font-weight: 600;
+			font-size: $admin-m;
+		}
+
+		&.emploees {
+			grid-template-columns: 0.9fr 0.6fr 0.5fr 0.5fr 0.7fr 0.8fr 0.4fr;
+		}
+		&.emploee {
+			grid-template-columns: 0.7fr 0.7fr 1fr 0.4fr 0.6fr 0.4fr;
+		}
+		&.reviws {
+			grid-template-columns: 0.7fr 0.7fr 1.2fr 0.4fr 0.6fr 0.8fr 0.6fr;
+		}
+		&.places {
+			grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+		}
+		.cell {
+			&.center {
+				width: 100%;
+				text-align: center;
+			}
+			&.disp-flex {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+		}
+		.cut_text {
+			overflow: hidden;
+			white-space: nowrap;
+			span {
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+		.link {
+			position: relative;
+			transition: all 0.1s;
+			font-style: italic;
+			&::after {
+				content: ' ';
+				width: 0%;
+				height: 0.12em;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				background-color: #000;
+				transition: width 0.4s;
+			}
+			&:hover::after {
+				width: 100%;
+			}
+		}
+	}
+}
+.row-button {
+	@include button-white;
+}
+.popup_wrapper {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100dvh;
+	z-index: 99999;
+	background-color: rgba($color: #000000, $alpha: 0.7);
+}

@@ -5,7 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const PageNavigationButtons = ({
-  listReviws,
+  dataListLen,
   sizeOnePage,
   indexPage,
   setIndexPage,
@@ -21,10 +21,10 @@ const PageNavigationButtons = ({
     );
   };
   useEffect(() => {
-    let sizeList = Math.ceil(listReviws.length / sizeOnePage);
+    let sizeList = Math.ceil(dataListLen / sizeOnePage);
     setQuantityPages(sizeList);
     setPageNumbers(calculatePageNumbers(sizeList, indexPage));
-  }, [listReviws, indexPage]);
+  }, [dataListLen, indexPage]);
   //переход на предыдущую и следующую страницу
   const handlePage = (method) =>
     setIndexPage(method === "dicr" ? indexPage + 1 : indexPage - 1);

@@ -44,15 +44,16 @@
     }
     .column:last-child {
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 8rem;
+      height: 8rem;
       border-radius: 50%;
       overflow: hidden;
       img {
+        width: 8rem;
+        height: 8rem;
         width: inherit;
         height: inherit;
         object-fit: cover;
-        transform: scale(2);
       }
     }
   }

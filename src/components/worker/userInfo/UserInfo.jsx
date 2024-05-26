@@ -31,10 +31,21 @@ const CardUser = ({ userData }) => (
       <div
         className={classes.fio}
       >{`${userData.lastName} ${userData.firstName}`}</div>
-      <div className={classes.raiting}>Средний рейтинг {userData.rating}</div>
+      <div className={classes.raiting}>
+        {userData.rating ? `Средний рейтинг ${userData.rating}` : "Нет отзывов"}
+      </div>
     </div>
     <div className={classes.column}>
-      <img src={process.env.PUBLIC_URL + "/images/avatar.jpeg"} alt="avatar" />
+      {
+        <img
+          src={
+            userData.foto
+              ? userData.foto
+              : process.env.PUBLIC_URL + "images/NoFaceAva.jpg"
+          }
+          alt="avatar"
+        />
+      }
     </div>
   </div>
 );

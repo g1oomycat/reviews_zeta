@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./header.module.scss";
 import { motion, useCycle } from "framer-motion";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../config/firebase";
+import { Context } from "../../..";
+import { observer } from "mobx-react-lite";
 
 //варианты для анимации бергер меню
 const button_variants = {
@@ -28,7 +30,8 @@ const button_variants = {
   },
 };
 
-const Header = () => {
+const Header = observer(() => {
+  const { directorData } = useContext(Context);
   const navigate = useNavigate();
   const [isOpen, toggleOpen] = useCycle(true, false);
 
@@ -52,7 +55,6 @@ const Header = () => {
   //выход из аккаунта
   const userLogout = async () => {
     await signOut(auth);
-    localStorage.clear();
     navigate("/sign_in");
   };
   return (
@@ -78,7 +80,9 @@ const Header = () => {
           </div>
         </div>
         <div className={classes.right_components}>
-          <span className={classes.fio}>Насыров Ильдар</span>
+          <span className={classes.fio}>
+            {directorData.director.lastName} {directorData.director.firstName}
+          </span>
           <button className={classes.exit} onClick={userLogout}>
             Выйти
           </button>
@@ -86,6 +90,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

@@ -1,0 +1,49 @@
+@import "../../../styles/scss/break_point.scss";
+
+.block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .image_wrapper {
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden;
+    border: 1px solid $adm-black;
+    border-radius: 50%;
+    z-index: 1;
+    img {
+      object-fit: fill;
+      width: inherit;
+      height: inherit;
+    }
+  }
+  .change_ava {
+    position: absolute;
+    bottom: -1.5rem;
+    z-index: 5;
+    background-color: $adm-white;
+    border: 1px solid $adm-black;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    overflow: hidden;
+
+    input[type="file"] {
+      display: none;
+    }
+    label {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.error_modal {
+  color: red;
+  font-size: $admin-xxs;
+}

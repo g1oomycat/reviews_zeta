@@ -1,38 +1,38 @@
 //fonts
 @font-face {
-  font-family: "AdihausDIN-Extrabold";
+	font-family: 'AdihausDIN-Extrabold';
 
-  /* Extrabold font */
-  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff2")
-      format("woff2"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff")
-      format("woff"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.otf")
-      format("otf");
-  font-weight: 800;
-  font-style: normal;
+	/* Extrabold font */
+	src: url('../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff2')
+			format('woff2'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.woff')
+			format('woff'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-extrabold.otf')
+			format('otf');
+	font-weight: 800;
+	font-style: normal;
 
-  /* Bold font */
-  font-family: "AdihausDIN-Bold";
-  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff2")
-      format("woff2"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff")
-      format("woff"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.otf")
-      format("otf");
-  font-weight: 700;
-  font-style: normal;
+	/* Bold font */
+	font-family: 'AdihausDIN-Bold';
+	src: url('../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff2')
+			format('woff2'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.woff')
+			format('woff'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-bold.otf')
+			format('otf');
+	font-weight: 700;
+	font-style: normal;
 
-  /* Semibold font */
-  font-family: "AdihausDIN-SemiBold";
-  src: url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff2")
-      format("woff2"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff")
-      format("woff"),
-    url("../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.otf")
-      format("otf");
-  font-weight: 700;
-  font-style: normal;
+	/* Semibold font */
+	font-family: 'AdihausDIN-SemiBold';
+	src: url('../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff2')
+			format('woff2'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.woff')
+			format('woff'),
+		url('../../../public/fonts/Fontspring-DEMO-aftikasoft-semibold.otf')
+			format('otf');
+	font-weight: 700;
+	font-style: normal;
 }
 
 // Breakpoints
@@ -85,14 +85,44 @@ $width-burger: 35rem;
 // other
 $shadow-midle: 0 4px 8px rgba(0, 0, 0, 0.1), 0 16px 32px rgba(0, 0, 0, 0.1);
 $shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-//mixin
 
+//mixin
 @mixin style-conteiner {
-  border: 1px solid $adm-border;
-  background-color: $adm-white;
-  border-radius: 1rem;
-  transition: box-shadow 0.3s ease;
-  &:hover {
-    box-shadow: $shadow-midle;
-  }
+	border: 1px solid $adm-border;
+	background-color: $adm-white;
+	border-radius: 1rem;
+	transition: box-shadow 0.3s ease;
+	&:hover {
+		box-shadow: $shadow-midle;
+	}
+}
+
+@mixin button-white {
+	font-size: inherit;
+	padding: 0.2em 0.7em;
+	background-color: $adm-white;
+	border-radius: 1rem;
+	border: 1px solid $adm-border;
+	transition: all 0.3s ease;
+	font-weight: 500;
+	&:hover {
+		background-color: $red;
+		color: $adm-white;
+		box-shadow: $shadow-midle;
+	}
+}
+@mixin button-red {
+	font-size: inherit;
+	padding: 0.2em 0.7em;
+	background-color: $red;
+	color: $adm-white;
+	border-radius: 1rem;
+	border: 1px solid $adm-border;
+	transition: all 0.3s ease;
+	font-weight: 500;
+	&:hover {
+		background-color: $adm-white;
+		color: $adm-black;
+		box-shadow: $shadow-midle;
+	}
 }

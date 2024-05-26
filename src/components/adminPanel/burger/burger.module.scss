@@ -34,12 +34,14 @@
     color: $red;
     transition: all 0.3s ease-in-out;
     opacity: var(--p-opacity);
-    cursor: pointer;
     font-family: "AdihausDIN-SemiBold", sans-serif;
     letter-spacing: 0.03em;
     font-size: $admin-xxl;
     border-bottom: 1px solid #797878;
     line-height: 1;
+    a {
+      color: inherit;
+    }
   }
   .conteiner {
     width: 100%;

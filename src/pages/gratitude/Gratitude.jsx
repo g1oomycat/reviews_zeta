@@ -6,11 +6,11 @@ import { FaYandex } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { listGrades } from "../../anyList/ListGradeANDURL";
 import Loader from "../../components/loader/Loader";
-import { getCorrectPlace } from "../../api/Place";
+import { getPlace } from "../../api/Place";
 
 const iconsPlatform = {
   yandex: <FaYandex />,
-  "2gis": (
+  twoGis: (
     <img src={process.env.PUBLIC_URL + "images/twogis_white.svg"} alt="logo" />
   ),
   google: <SiGooglestreetview />,
@@ -25,7 +25,7 @@ const Gratitude = () => {
   useEffect(() => {
     const getPlaceData = async () => {
       try {
-        const res = await getCorrectPlace(place);
+        const res = await getPlace(place);
         setUrlMap(res.urlMap);
       } catch (error) {
         console.error(error);
@@ -49,7 +49,7 @@ const Gratitude = () => {
   );
 };
 const BodyGratitude = ({ urlMap }) => (
-  <div className="wrapper_main">
+  <>
     <div className="_cont_limit">
       <div className="_after-cont-limit-flex">
         <div className={classes.wrapper}>
@@ -59,7 +59,7 @@ const BodyGratitude = ({ urlMap }) => (
       </div>
     </div>
     <Background />
-  </div>
+  </>
 );
 
 const Header = () => (

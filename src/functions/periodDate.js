@@ -33,6 +33,7 @@ const dataFromPeriod = (data, period) => {
 
 //данные для вертикального графика
 export const dataToVerticalBarChar = (data, period) => {
+  if (data.length === 0) return [];
   let dataObj = {};
   const listData = dataFromPeriod(data, period);
   if (period["year"]) {
@@ -89,7 +90,7 @@ export const absGrade = (data, period, findData = []) => {
 
 //данные для pie графика
 export const dataToPieBarChar = (data, period) => {
-  if (data.length === 0) return;
+  if (data.length === 0) return [];
   const listData = dataFromPeriod(data, period);
 
   let dataObj = {};

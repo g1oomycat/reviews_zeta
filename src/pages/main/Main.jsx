@@ -4,7 +4,7 @@ import Background from "../../components/background/Background";
 
 const Main = () => {
   return (
-    <div className="wrapper_main">
+    <>
       <div className="_cont_limit">
         <div className="_after-cont-limit-flex">
           <div className={classes.wrapper}>
@@ -26,7 +26,7 @@ const Main = () => {
         </div>
       </div>
       <Background />
-    </div>
+    </>
   );
 };
 

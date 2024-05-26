@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
 import UserInfo from "../../components/worker/userInfo/UserInfo";
-import { getUser } from "../../api/FBUsers";
+import { getUser } from "../../api/Users";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 
